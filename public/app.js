@@ -1,5 +1,6 @@
 var TodoList = React.createClass({
 	render: function(){
+		var self = this;
 		var todoList = this.props.allMyData.map(function(t){
 			return (
 			<div className="panel panel-default">	
@@ -11,6 +12,10 @@ var TodoList = React.createClass({
 				</div>
 				<div className="panel panel-footer">
 					{t.description}
+					<button className="btn btn-warning" 
+					onClick={self.props.handleDelete}> 
+					delete 
+					</button>
 				</div>
 			</div>
 			)
@@ -44,6 +49,10 @@ var App = React.createClass({
 		});
 	},
 
+	handleDelete: function() {
+		alert("want to delete?")
+	},
+
 	componentDidMount: function() {
 		this.loadTodosFromServer();
 	},
@@ -52,7 +61,8 @@ var App = React.createClass({
 		return (
 			<div>
 				<h3> Hello World! </h3>
-				<TodoList allMyData={ this.state.todos }/>
+				<TodoList handleDelete={ this.handleDelete } 
+				          allMyData={ this.state.todos }/>
 			</div>
 			)
 	}
